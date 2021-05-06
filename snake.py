@@ -14,6 +14,10 @@ from random import randrange
 from freegames import square, vector
 import random
 
+#Codigo Modificado por: Ariel Campos Hernández
+#Autor 1:Juan Pablo Elorriaga Gaitán
+#Autor 2: Ariel Campos Hernández
+
 food = vector(0, 0)    #Un vector
 snake = [vector(10, 0)]    #Una serie de vectores
 aim = vector(0, -10)
