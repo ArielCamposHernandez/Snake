@@ -14,8 +14,12 @@ from random import randrange
 from freegames import square, vector
 import random #Importa el modulo random de python para utilizar la funcion choice
 
-food = vector(0, 0)
-snake = [vector(10, 0)]
+#Codigo Modificado por: Ariel Campos Hernández
+#Autor 1:Juan Pablo Elorriaga Gaitán
+#Autor 2: Ariel Campos Hernández
+
+food = vector(0, 0)    #Un vector
+snake = [vector(10, 0)]    #Una serie de vectores
 aim = vector(0, -10)
 dir1 = vector(0, -5)
 dir2 = vector(0, 5)
@@ -62,16 +66,23 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, col1)
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, col2)
     update()
     ontimer(move, 100)
 
 setup(420, 420, 370, 0)
+col=['yellow','blue','purple','green','orange']   #Lista para seleccionar color
+col1=random.choice(col)    #Selecciona un color al azar de la lista para serpiente
+col2=random.choice(col)    #Selecciona un color al azar de la lista para comida
+while col1==col2:    #Solucion para color repetido
+        col1=random.choice(col)
+        col2=random.choice(col)
 hideturtle()
 tracer(False)
-listen()
+listen()    #Escuchar los eventos del teclado
+
 onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
