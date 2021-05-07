@@ -12,30 +12,44 @@ Exercises
 from turtle import *
 from random import randrange
 from freegames import square, vector
+import random #Importa el modulo random de python para utilizar la funcion choice
 
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+dir1 = vector(0, -5)
+dir2 = vector(0, 5)
+dir3 = vector(-5, 0)
+dir4 = vector(5, 0) #Se definen 4 diferentes direcciones (arriba, abajo, izquierda y derecha)
+rd = [dir1, dir2, dir3, dir4] #Se define una lista con las 4 posibles direcciones en las que se moverá la comida
+rd1 = random.choice(rd) #Se utiliza la función choice del modulo random para que cada vez la comiuda se mueva en una dirección distinta
 
 def change(x, y):
     "Change snake direction."
     aim.x = x
     aim.y = y
 
+
 def inside(head):
     "Return True if head inside boundaries."
     return -200 < head.x < 190 and -200 < head.y < 190
+
 
 def move():
     "Move snake forward one segment."
     head = snake[-1].copy()
     head.move(aim)
+    food.move(rd1) #Se aplica la misma funcion de movimiento a la comida
 
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
         update()
         return
 
+    if not inside(food): #Si la comida sale del rango, entonces esta regresará a la posición (0, 0) y continuará moviendose desde ahi
+        food.x=0
+        food.y=0
+    
     snake.append(head)
 
     if head == food:
